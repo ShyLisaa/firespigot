@@ -1,0 +1,6 @@
+name: FireSpigot
+version: 2.0.0
+author: ShyLisaa
+description: FireSpigot plugin which makes it able to load Modules into the server and replace them with plugins.
+main: dev.shylisaa.firespigot.plugin.FireSpigotPlugin
+api-version: 1.16

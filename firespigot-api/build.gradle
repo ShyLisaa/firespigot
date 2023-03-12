@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'maven-publish'
+}
+
+shadowJar {
+    compileJava.options.encoding = 'UTF-8'
+
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.encoding = 'UTF-8'
+        }
+    }
+}
+
+group 'dev.shylisaa'
+version '2.1.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+}
+
+dependencies {
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+    implementation 'com.mysql:mysql-connector-j:8.0.32'
+    implementation 'org.slf4j:slf4j-api:1.7.32'
+    implementation 'org.slf4j:slf4j-simple:1.7.32'
+    implementation 'org.jetbrains:annotations:23.0.0'
+    shadow 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    implementation 'org.mongodb:mongodb-driver-sync:4.9.0'
+    shadow 'commons-io:commons-io:2.11.0'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            String version = project.version
+            if (version.endsWith('-SNAPSHOT')) {
+                url = 'https://repo.femboydevelopments.net/repository/maven-snapshots/'
+            } else {
+                url = 'https://repo.femboydevelopments.net/repository/maven-releases/'
+            }
+            credentials {
+                username = project.property("repo_user")
+                password = project.property("repo_secret_key")
+            }
+        }
+    }
+}

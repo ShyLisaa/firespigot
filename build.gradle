@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'dev.shylisaa'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}

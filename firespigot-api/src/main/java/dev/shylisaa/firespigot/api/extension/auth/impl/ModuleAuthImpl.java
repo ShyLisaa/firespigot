@@ -90,6 +90,7 @@ public class ModuleAuthImpl implements ModuleAuth {
             CommandMap commandMap = (CommandMap) bukkitCommandMap.get(Bukkit.getServer());
             commandMap.register(spigotCommand.name(), commandBukkitAuth);
             bukkitCommandMap.setAccessible(false);
+            System.out.println("Command " + spigotCommand.name() + " registered.");
         } catch (NoSuchFieldException | IllegalAccessException exception) {
             System.out.println("An error occurred. Please report this on github or spigotmc.");
             exception.printStackTrace();

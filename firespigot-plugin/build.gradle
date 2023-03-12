@@ -1,0 +1,35 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group 'dev.shylisaa'
+version '2.0.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+}
+
+dependencies {
+    implementation project(path: ':firespigot-api')
+    shadow 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+}
+
+shadowJar {
+
+    archiveBaseName.set('FireSpigot')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+    compileJava.options.encoding = 'UTF-8'
+
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.encoding = 'UTF-8'
+        }
+    }
+}
